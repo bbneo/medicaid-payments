@@ -1,3 +1,15 @@
+"""
+medicaid_outliers-stream.py
+
+The streaming method which keeps memory usage low requires you to presort the
+payments datafile (one time) before beginning.
+
+# One-time sort (uses external sort → very low memory)
+sort -t, -k3,3 -k4,4 -S 4G --parallel=8 yourfile.csv > sorted.csv
+# (adjust column numbers; HCPCS is 3rd, CLAIM_FROM_MONTH is 4th in your schema)
+
+"""
+
 import pandas as pd
 import argparse
 from tqdm import tqdm
